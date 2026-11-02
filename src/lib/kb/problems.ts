@@ -1,13 +1,9 @@
-// What a merged report is actually about. causes.ts places a report by tenant and channel; the desk's
-// reading (desk-notes.json) overrides that for reports that describe no month flip at all.
+// What a merged report is about, counted the desk's way: every report under the cause its tenant and
+// channel give it (causes.ts), and a report the desk read as a one-day move (desk-notes.json) also
+// under `one-day`, as readAs footnotes it.
 import { causeOf, uniqueById, type Report, type Tenant } from '#lib/kb/causes';
 
 export type Problem = 'parser' | 'hint' | 'one-day';
-
-export function problemOf(r: Report, t: Tenant | undefined, oneDayMove: readonly string[]): Problem | 'unplaced' {
-  if (oneDayMove.includes(r.id)) return 'one-day';
-  return causeOf(r, t) ?? 'unplaced';
-}
 
 export type ProblemGroup = { problem: Problem | 'unplaced'; reports: Report[]; tenants: number; mistagged: number };
 
@@ -19,9 +15,10 @@ export function groupByProblem(
 ): { merged: number; groups: ProblemGroup[] } {
   const merged = uniqueById(reports).filter((r) => r.mergedInto === ticket);
   const by = new Map<ProblemGroup['problem'], Report[]>();
+  const add = (p: ProblemGroup['problem'], r: Report) => by.set(p, [...(by.get(p) ?? []), r]);
   for (const r of merged) {
-    const p = problemOf(r, tenantOf(r), oneDayMove);
-    by.set(p, [...(by.get(p) ?? []), r]);
+    add(causeOf(r, tenantOf(r)) ?? 'unplaced', r);
+    if (oneDayMove.includes(r.id)) add('one-day', r);
   }
   const groups = [...by.entries()]
     .map(([problem, rs]) => ({

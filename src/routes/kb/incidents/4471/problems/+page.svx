@@ -39,13 +39,15 @@ Not one issue. Each problem below has its own ticket; #4471 stays open until all
   does not touch it.
 - **`one-day`**: the date lands one day early, or on different days for people in different
   zones (Lisbon got Tuesday, Toronto got Monday). Nothing is swapped. These are the reports the
-  desk already read as a one-day move (`desk-notes.json`), which the cause table still counts as `parser`.
+  desk already read as a one-day move (`desk-notes.json`). As the desk counts, they stay filed
+  under `parser` by tenant as well, so the rows add up to more than the merged total.
 
 ## How the reports were placed
 
 Every report merged into #4471 was read, once per id: the export repeats some reports across its
 overlapping pages. The problem comes from the tenant's locale and booking form (`causes.ts`) and the
-desk's reading of the body, never from intake's tag, which is a guess from the reporter's browser.
+desk's reading of the body (`desk-notes.json`), never from intake's tag, which is a guess from the
+reporter's browser.
 The last column counts reports intake tagged with a different cause.
 
 For comparison, the cause table on #4471, which knows only two causes:
