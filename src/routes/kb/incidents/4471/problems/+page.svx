@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 · three problems, not one'
 owner: support desk
-status: open
+status: closed
 reviewed: 2026-11-02
 signature: 'Steve Scheffler'
 ---
@@ -15,17 +15,20 @@ signature: 'Steve Scheffler'
 
   const repo = 'https://github.com/scheffler/mega-what-it-shows/issues';
   const tickets = {
-    parser: { label: '#1 shared parser', href: `${repo}/1` },
-    hint: { label: '#2 booking-v3 hint', href: `${repo}/2` },
-    'one-day': { label: '#3 one-day move', href: `${repo}/3` },
+    parser: { label: '#1 shared parser · fixed', href: `${repo}/1` },
+    hint: { label: '#2 booking-v3 hint · won\'t fix', href: `${repo}/2` },
+    'one-day': { label: '#3 one-day move · no fix named', href: `${repo}/3` },
   };
 </script>
 
-[#4471](/kb/incidents/4471) is marked known with one fix queued. The reports in it describe three
-different problems, and the queued parser fix closes only the first.
+[#4471](/kb/incidents/4471) was merged as one issue with one fix queued. The reports in it describe
+three different problems. Engineering closed #4471 on 5 October: the parser is fixed
+(`fix(dates): parse dd/mm for eu locales`), the hint is won't fix because the booking-v3 form is
+retired, and the one-day move has no fix of its own.
 
 <Callout kind="warn">
-Not one issue. Each problem below has its own ticket; #4471 stays open until all three close.
+Not one issue. Each problem below has its own ticket, now closed with engineering's outcome. A
+one-day move reported after the parser fix reopens #3.
 </Callout>
 
 ## The problems
@@ -58,7 +61,7 @@ For comparison, the cause table on #4471, which knows only two causes:
 
 - Subject lines do not separate these problems: several subjects turn up in all three. Read the
   tenant and the channel before you merge.
-- Ship the parser fix and #4471 still gets reports from booking-v3's form and one-day moves. Route
-  those to their own tickets.
+- The parser fix does not end one-day moves. Route any new one to #3, not to #4471.
+- booking-v3's form is retired; a hint report from a tenant still on it means the form is still live.
 
 <RenderStamp {signature} />
