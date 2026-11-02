@@ -4,7 +4,7 @@ title: '#4471 · three problems, not one'
 owner: support desk
 status: closed
 reviewed: 2026-11-02
-signature: 'Steve Scheffler'
+signature: 'v1.eyJzdWIiOiIyNDEiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdCI6MTc5MzYzNzQ4NywiZXhwIjoxNzkzNzIzODg3fQ.uWUCidyJ5_8qUUShgE1zRfm0znG8Y9aUEEAkr1k_PRU'
 ---
 
 <script>
